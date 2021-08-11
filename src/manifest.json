@@ -12,9 +12,21 @@
     "scripts": ["event.js"],
     "persistent": false
   },
-
-  "permissions": [
-    "activeTab",
-    "contextMenus"
-  ]
+  "permissions": ["activeTab", "contextMenus"],
+  "commands": {
+    "en_ja": {
+      "description": "英⇒日",
+      "global": false,
+      "suggested_key": {
+        "default": ""
+      }
+    },
+    "ja_en": {
+      "description": "日⇒英",
+      "global": false,
+      "suggested_key": {
+        "default": ""
+      }
+    }
+  }
 }
