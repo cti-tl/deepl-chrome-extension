@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "DeepL翻訳",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "DeepL翻訳を手軽に利用できる様に拡張機能化しました！",
   "icons": {
     "16": "icons/deepl_translation_icon_16.png",
     "48": "icons/deepl_translation_icon_48.png",
     "128": "icons/deepl_translation_icon_128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "show DeepL"
   },
   "background": {
     "service_worker": "event.js"
