@@ -1,0 +1,10 @@
+{
+  "appname": {
+    "message": "DeepL翻訳",
+    "description": "App Name"
+  },
+  "appdesc": {
+    "message": "test",
+    "description": "App Description"
+  }
+}

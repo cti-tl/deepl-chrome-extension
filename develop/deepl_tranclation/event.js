@@ -24,60 +24,84 @@
     });
   });
 
-  // メニューをクリック時に実行
-  chrome.contextMenus.onClicked.addListener((item) => {
+  chrome.tabs.onHighlighted.addListener((item) => {
     console.log(item);
-    switch (item.menuItemId) {
-      case 'en_ja':
-        window.open(
-          'https://www.deepl.com/translator#en/ja/' + item.selectionText,
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      case 'ja_en':
-        window.open(
-          'https://www.deepl.com/translator#ja/en/' + item.selectionText,
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      case 'en_zh':
-        window.open(
-          'https://www.deepl.com/translator#en/zh/' + item.selectionText,
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      case 'zh_en':
-        window.open(
-          'https://www.deepl.com/translator#zh/en/' + item.selectionText,
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      default:
-    }
   });
-  chrome.commands.onCommand.addListener((item) => {
-    switch (item) {
-      case 'en_ja':
-        window.open(
-          'https://www.deepl.com/translator#en/ja/' +
-            window.getSelection().toString(),
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      case 'ja_en':
-        window.open(
-          'https://www.deepl.com/translator#ja/en/' +
-            window.getSelection().toString(),
-          null,
-          'top=50,left=50,width=700,height=700'
-        );
-        break;
-      default:
-    }
+
+  // const PopDeepL = (menuId, text) => {
+  //   console.log('test');
+  //   switch (menuId) {
+  //     case 'en_ja':
+  //       chrome.windows.create({
+  //         url: 'https://www.deepl.com/translator#en/ja/' + text,
+  //         width: 700,
+  //         height: 700,
+  //       });
+  //       break;
+  //     case 'ja_en':
+  //       chrome.windows.create({
+  //         url: 'https://www.deepl.com/translator#ja/en/' + text,
+  //         width: 700,
+  //         height: 700,
+  //       });
+  //       break;
+  //     case 'en_zh':
+  //       chrome.windows.create({
+  //         url: 'https://www.deepl.com/translator#en/zh/' + text,
+  //         width: 700,
+  //         height: 700,
+  //       });
+  //       break;
+  //     case 'zh_en':
+  //       chrome.windows.create({
+  //         url: 'https://www.deepl.com/translator#zh/en/' + text,
+  //         width: 700,
+  //         height: 700,
+  //       });
+  //       break;
+  //     default:
+  //   }
+  // };
+
+  // メニューをクリック時に実行
+  chrome.contextMenus.onClicked.addListener((info) => {
+    console.log(info);
+    chrome.windows.create({
+      url: 'https://www.deepl.com/translator#en/ja/' + info.selectionText,
+      type: 'popup',
+      width: 700,
+      height: 700,
+    });
+    // chrome.scripting.executeScript(
+    //   {
+    //     target: { tabId: item.tabId },
+    //     func: PopDeepL,
+    //     args: [item.menuItemId, item.selectionText],
+    //   },
+    //   () => {
+    //     alert('test');
+    //   }
+    // );
   });
+  // chrome.commands.onCommand.addListener((item) => {
+  //   switch (item) {
+  //     case 'en_ja':
+  //       window.open(
+  //         'https://www.deepl.com/translator#en/ja/' +
+  //           window.getSelection().toString(),
+  //         null,
+  //         'top=50,left=50,width=700,height=700'
+  //       );
+  //       break;
+  //     case 'ja_en':
+  //       window.open(
+  //         'https://www.deepl.com/translator#ja/en/' +
+  //           window.getSelection().toString(),
+  //         null,
+  //         'top=50,left=50,width=700,height=700'
+  //       );
+  //       break;
+  //     default:
+  //   }
+  // });
 }

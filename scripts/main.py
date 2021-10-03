@@ -68,6 +68,7 @@ def setting_version(version_str, key):
         version[0] = str(0)
         version[1] = str(0)
         version[2] = str(1)
+    print(version_str + ' => ' + ('.'.join(version)))
     return '.'.join(version)
 
 
@@ -119,6 +120,8 @@ def iconResizeDataSave(img, size=128):
         setIconUrl(json, size, baseName + "-" +
                    str(size) + "x" + str(size) + ".png")
         save_manifest(json)
+        print(baseName + "-" +
+              str(size) + "x" + str(size) + ".png")
 
 
 def clearBkColor(img_path, img_savepath):
