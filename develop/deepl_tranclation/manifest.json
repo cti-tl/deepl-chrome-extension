@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_appname__",
-  "version": "1.0.29",
+  "version": "1.1.0",
   "description": "__MSG_appdesc__",
   "icons": {
     "16": "icons/deepl_translation_icon_16.png",
@@ -9,33 +9,17 @@
     "128": "icons/deepl_translation_icon_128.png"
   },
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_title": "show DeepL"
+    "default_title": "__MSG_appname__"
   },
   "background": {
     "service_worker": "event.js"
   },
   "default_locale": "en",
   "permissions": [
+    "tabs",
     "activeTab",
     "contextMenus",
     "scripting",
     "windows"
-  ],
-  "commands": {
-    "en_ja": {
-      "description": "英⇒日",
-      "global": false,
-      "suggested_key": {
-        "default": "Ctrl+Shift+1"
-      }
-    },
-    "ja_en": {
-      "description": "日⇒英",
-      "global": false,
-      "suggested_key": {
-        "default": "Ctrl+Shift+2"
-      }
-    }
-  }
+  ]
 }

@@ -2,106 +2,67 @@
 
 {
   chrome.runtime.onInstalled.addListener(() => {
-    const en_ja = chrome.contextMenus.create({
-      id: 'en_ja',
-      title: '英⇒日',
-      contexts: ['selection'],
-    });
-    const ja_en = chrome.contextMenus.create({
-      id: 'ja_en',
-      title: '日⇒英',
-      contexts: ['selection'],
-    });
-    const en_zh = chrome.contextMenus.create({
-      id: 'en_zh',
-      title: '英⇒中',
-      contexts: ['selection'],
-    });
-    const zh_en = chrome.contextMenus.create({
-      id: 'zh_en',
-      title: '中⇒英',
-      contexts: ['selection'],
+    const MenuItems = [
+      { id: 'ja_en', title: 'Auto Language ⇒ English' },
+      { id: 'en_de', title: 'English ⇒ Deutsch' },
+      { id: 'en_fr', title: 'English ⇒ Français' },
+      { id: 'en_es', title: 'English ⇒ Español' },
+      { id: 'en_ja', title: 'English ⇒ 日本語' },
+      { id: 'en_pt-PT', title: 'English ⇒ Português' },
+      { id: 'en_pt-BR', title: 'English ⇒ Português (Brasil)' },
+      { id: 'en_it', title: 'English ⇒ Italiano' },
+      { id: 'en_nl', title: 'English ⇒ Nederlands' },
+      { id: 'en_pl', title: 'English ⇒ Polski' },
+      { id: 'en_ru', title: 'English ⇒ Русский' },
+      { id: 'en_zh', title: 'English ⇒ 简体中文' },
+      { id: 'en_sv', title: 'English ⇒ Svenska' },
+    ];
+    MenuItems.forEach((item) => {
+      chrome.contextMenus.create({ ...item, contexts: ['selection'] });
     });
   });
 
-  chrome.tabs.onHighlighted.addListener((item) => {
-    console.log(item);
+  chrome.action.onClicked.addListener((tab) => {
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tab.id },
+        func: () => {
+          return window.getSelection().toString();
+        },
+      },
+      (selection) => {
+        if (selection) {
+          chrome.windows.create({
+            url:
+              'https://www.deepl.com/translator#en/ja/' +
+              (selection[0].result
+                ? encodeURIComponent(selection[0].result)
+                : ''),
+            type: 'popup',
+            width: 700,
+            height: 700,
+          });
+        }
+      }
+    );
   });
-
-  // const PopDeepL = (menuId, text) => {
-  //   console.log('test');
-  //   switch (menuId) {
-  //     case 'en_ja':
-  //       chrome.windows.create({
-  //         url: 'https://www.deepl.com/translator#en/ja/' + text,
-  //         width: 700,
-  //         height: 700,
-  //       });
-  //       break;
-  //     case 'ja_en':
-  //       chrome.windows.create({
-  //         url: 'https://www.deepl.com/translator#ja/en/' + text,
-  //         width: 700,
-  //         height: 700,
-  //       });
-  //       break;
-  //     case 'en_zh':
-  //       chrome.windows.create({
-  //         url: 'https://www.deepl.com/translator#en/zh/' + text,
-  //         width: 700,
-  //         height: 700,
-  //       });
-  //       break;
-  //     case 'zh_en':
-  //       chrome.windows.create({
-  //         url: 'https://www.deepl.com/translator#zh/en/' + text,
-  //         width: 700,
-  //         height: 700,
-  //       });
-  //       break;
-  //     default:
-  //   }
-  // };
 
   // メニューをクリック時に実行
   chrome.contextMenus.onClicked.addListener((info) => {
-    console.log(info);
+    const url =
+      'https://www.deepl.com/translator' +
+      (info.menuItemId
+        ? '#' +
+          info.menuItemId.replace('_', '/') +
+          '/' +
+          encodeURIComponent(info.selectionText)
+        : '');
+    console.log(url);
     chrome.windows.create({
-      url: 'https://www.deepl.com/translator#en/ja/' + info.selectionText,
+      url: url,
       type: 'popup',
       width: 700,
       height: 700,
     });
-    // chrome.scripting.executeScript(
-    //   {
-    //     target: { tabId: item.tabId },
-    //     func: PopDeepL,
-    //     args: [item.menuItemId, item.selectionText],
-    //   },
-    //   () => {
-    //     alert('test');
-    //   }
-    // );
   });
-  // chrome.commands.onCommand.addListener((item) => {
-  //   switch (item) {
-  //     case 'en_ja':
-  //       window.open(
-  //         'https://www.deepl.com/translator#en/ja/' +
-  //           window.getSelection().toString(),
-  //         null,
-  //         'top=50,left=50,width=700,height=700'
-  //       );
-  //       break;
-  //     case 'ja_en':
-  //       window.open(
-  //         'https://www.deepl.com/translator#ja/en/' +
-  //           window.getSelection().toString(),
-  //         null,
-  //         'top=50,left=50,width=700,height=700'
-  //       );
-  //       break;
-  //     default:
-  //   }
-  // });
 }
