@@ -1,0 +1,10 @@
+{
+  "appname": {
+    "message": "DeepL Trancelate",
+    "description": "App Name"
+  },
+  "appdesc": {
+    "message": "Hemos convertido la traducción de DeepL en una extensión para facilitar su uso.",
+    "description": "App Description"
+  }
+}

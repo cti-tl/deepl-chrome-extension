@@ -1,0 +1,10 @@
+{
+  "appname": {
+    "message": "DeepL 转化",
+    "description": "App Name"
+  },
+  "appdesc": {
+    "message": "我们已经将DeepL 翻译成了一个扩展，使其更容易使用!",
+    "description": "App Description"
+  }
+}
