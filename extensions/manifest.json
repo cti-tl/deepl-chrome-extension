@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appname__",
+  "version": "1.2.0",
+  "description": "__MSG_appdesc__",
+  "icons": {
+    "32": "icons/icon_32.png",
+    "64": "icons/icon_64.png",
+    "128": "icons/icon_128.png"
+  },
+  "action": {
+    "default_title": "__MSG_appname__",
+    "default_icon": {
+      "32": "icons/icon_32.png",
+      "64": "icons/icon_64.png",
+      "128": "icons/icon_128.png"
+    }
+  },
+  "background": {
+    "service_worker": "event.js"
+  },
+  "commands": {
+    "deepl_open": {
+      "suggested_key": {
+        "default": "Alt+D",
+        "mac": "Alt+D"
+      },
+      "description": "__MSG_appname__"
+    }
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "scripting",
+    "windows"
+  ]
+}
