@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_appname__",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "__MSG_appdesc__",
   "icons": {
     "32": "icons/icon_32.png",
@@ -30,7 +30,6 @@
   },
   "default_locale": "en",
   "permissions": [
-    "tabs",
     "activeTab",
     "contextMenus",
     "scripting",
